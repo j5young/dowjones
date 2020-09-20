@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<h1>DOW Jones Index 2011</h1>
+
+<hr/>
+
+<h4>Upload Bulk Data File:</h4>
+<form method="POST" th:action="@{/uploadFile}" enctype="multipart/form-data">
+  <input type="file" name="file"/> <br/><br/>
+  <button type="submit">Submit</button>
+</form>
+
+<div th:if="${message}">
+  <h2 th:text="${message}"/>
+</div>
+
+<hr/>
+
+<h4>Query for Data by Stock Ticker:</h4>
+<form method="GET" th:action="@{/stockData}">
+  <input type="text" name=stockName placeholder="stockName"> <br/><br/>
+  <button type="submit">Submit</button>
+</form>
+
+<h2>List of stock data</h2>
+
+<table>
+
+    <tr>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Open</th>
+        <th>High</th>
+        <th>Low</th>
+        <th>Close</th>
+    </tr>
+
+    <tr th:each="stock : ${stocks}">
+        <td th:text="${stock.stockName}">name</td>
+        <td th:text="${stock.date}">date</td>
+        <td th:text="${stock.open}">open</td>
+        <td th:text="${stock.high}">high</td>
+        <td th:text="${stock.low}">low</td>
+        <td th:text="${stock.close}">close</td>
+    </tr>
+
+</table>
+
+<hr/>
+
+<h4>Add a new record:</h4>
+
+<a href="/stockData/addnew" class="btn btn-primary"><i
+       class="fas fa-user-plus ml-2"> Add Record</i></a>
+
+<hr/>
+
+
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Add</title>
+</head>
+<body>
+
+<h1>Add row</h1>
+
+<tr th:each="stock : ${stocks}">
+        <td th:text="${stock.stockName}">name</td>
+        <td th:text="${stock.date}">date</td>
+    </tr>
+
+<form th:action="@{/stockData/add}" th:object="${stockData}" method="post">
+<div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+    <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>    
+</div>
+		<label>
+			<span class="label-title">Id:</span>
+			<input type="number" th:field="*{stockDataId}" />
+		</label>
+	<!-- <p>Id: <input type="number" th:field="*{stockDataId}" /></p>-->
+    <p>Quarter: <input type="number" th:field="*{quarter}" /></p>
+    <p>Date: <input type="date" th:field="*{date}" /></p>
+    <p>Open: <input type="number" step="any" th:field="*{open}" /></p>
+    <p>High: <input type="number" step="any" th:field="*{high}" /></p>
+    <p>Low: <input type="number" step="any" th:field="*{low}" /></p>
+    <p>Close: <input type="number" step="any" th:field="*{close}" /></p>
+    <p>Volume: <input type="number" th:field="*{volume}" /></p>
+    <p>Percent change price: <input type="number" step="any" th:field="*{percentChangePrice}" /></p>
+    <p>Percent change volume over last week: <input type="number" step="any" th:field="*{percentChangeVolumeOverLastWk}" /></p>
+    <p>Previous weeks volume: <input type="number" th:field="*{previousWeeksVolume}" /></p>
+    <p>Next weeks open: <input type="number" step="any" th:field="*{nextWeeksOpen}" /></p>
+    <p>Next weeks close: <input type="number" step="any" th:field="*{nextWeeksClose}" /></p>
+    <p>Percent change next week's price: <input type="number" step="any" th:field="*{percentChangeNextWeeksPrice}" /></p>
+    <p>Days to next dividend: <input type="number" th:field="*{daysToNextDividend}" /></p>
+    <p>Percent return next dividend: <input type="number" step="any" th:field="*{percentReturnNextDividend}" /></p>
+    <p>Stock name: <input type="text" th:field="*{stockName}" /></p>
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
+
+<div th:if="${message}">
+  <h2 th:text="${message}"/>
+</div>
+
+</body>
+</html>
